@@ -1,12 +1,13 @@
-import React from 'react'
-import Authentication from './pages/Authentication'
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Authentication from './pages/Authentication';
 
 const App = () => {
   return (
-    <div>
-      <Authentication /> 
-    </div>
+    <Routes>
+      <Route path='/' element={<Authentication/>} />
+    </Routes>
   )
 }
 
-export default App
+export default App;
