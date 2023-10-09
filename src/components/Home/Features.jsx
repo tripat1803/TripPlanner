@@ -6,8 +6,8 @@ function FeaturesCard({ icon, heading, body }) {
         <div className="layout">
             <div className="icon">{icon}</div>
             <div className="feature">
-                <h4>{heading}</h4>
-                <p>{body}</p>
+                <h4 className='text-xl font-semibold'>{heading}</h4>
+                <p className='text-[#666666]'>{body}</p>
             </div>
         </div>
     )
@@ -17,10 +17,10 @@ export default function Features() {
     return (
         <div className='flex justify-center'>
             <div className="container">
-                <div className="container-1">
-                    <h6>TRAVELUX.AI</h6>
-                    <h3>The only tool you'll ever need!</h3>
-                    <p>Say goodbye to the stress of planning and hello to personalized recommendations, efficient itineraries, and seamless dining experiences.</p>
+                <div className="container-4">
+                    <h6 className='text-xl text-[#10B5CB]'>TRAVELUX.AI</h6>
+                    <h3 className='text-4xl font-semibold'>The only tool you'll ever need!</h3>
+                    <p className='w-[75%] text-center text-[#666666]'>Say goodbye to the stress of planning and hello to personalized recommendations, efficient itineraries, and seamless dining experiences.</p>
                 </div>
 
                 <div className="container-3">

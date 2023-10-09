@@ -11,7 +11,7 @@ function TestimonialCard() {
             </div>
             <div className="content">
                 <div className="name">
-                    <h3>Lorem ipsum Lorem</h3>
+                    <h3 className='text-lg font-semibold'>Lorem ipsum Lorem</h3>
                     <p>Lorem ipsum Lorem</p>
                 </div>
                 <div className="testimonial">
@@ -28,7 +28,7 @@ function TestimonialCard() {
                 </div>
                 <p style={{
                     textAlign: "right"
-                }}>Continue Reading</p>
+                }} className='text-transparent bg-clip-text bg-[linear-gradient(90deg,#10B5CB_0%,#0073A8_100%)]'>Continue Reading</p>
             </div>
         </div>
     )
@@ -39,11 +39,11 @@ export default function Testimonials() {
         <div className='flex justify-center'>
             <div className="container">
                 <div className="container-1">
-                    <h1>Don't take our word for it</h1>
+                    <h1 className='text-4xl font-semibold'>Don't take our word for it</h1>
                     <p style={{
-                        width: "75%",
+                        width: "85%",
                         textAlign: "center",
-                    }}>See what our users have to say about revolutionizing their travel experiences with Travelux.ai</p>
+                    }} className='text-[#666666]'>See what our users have to say about revolutionizing their travel experiences with Travelux.ai</p>
                 </div>
                 <div className="container-2">
                     <div className="row-2">
