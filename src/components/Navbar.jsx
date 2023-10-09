@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../context/UserState';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
 
     let user = useContext(UserContext);
     let navigate = useNavigate();
+    let location = useLocation();
 
     return (
-        <div className='w-full py-4 px-8 sm:px-16 bg-white fixed top-0 z-[30]'>
+        <div className={`w-full ${location.pathname.includes("trip") ? "hidden" : "flex"} justify-center items-center py-4 px-8 sm:px-16 bg-white fixed top-0 z-[30]`}>
             <div className='max-w-screen-2xl w-full flex gap-4 justify-between items-center'>
                 <div className='flex gap-3 items-center'>
                     <div className='w-6 h-6 rounded-full bg-gray-800'></div>

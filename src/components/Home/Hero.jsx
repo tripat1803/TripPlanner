@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
+import { GrAdd, GrSubtract } from 'react-icons/gr';
+import { MdArrowDropDown } from 'react-icons/md';
 
 export default function Hero() {
+
+    const [counter, setCounter] = useState({
+        adult: 0,
+        children: 0
+    });
+    const [show, setShow] = useState(false);
+
     return (
         <div className='min-h-screen py-4 flex justify-center items-center px-8 sm:px-16 relative'>
             <img className='absolute top-0 left-0 w-full h-full object-cover z-[1]' src={require("../../assets/background.png")} />
@@ -12,7 +21,7 @@ export default function Hero() {
                         <h1 className='text-3xl xxs:text-4xl ss:text-5xl'>Explore the world</h1>
                         <h1 className='text-3xl xxs:text-4xl ss:text-5xl'>like never before</h1>
                     </div>
-                    <div className='bg-white rounded-lg overflow-hidden flex gap-4'>
+                    <div className='bg-white rounded-lg flex gap-4'>
                         <div className='w-[40%] flex items-center pl-3'>
                             <CiSearch size={24} />
                             <input type='text' placeholder='Where are you going?' className='flex-1 py-2 px-3 outline-none' />
@@ -23,11 +32,31 @@ export default function Hero() {
                         <div className='flex items-center'>
                             <input type='date' className='flex-1 py-2 outline-none' />
                         </div>
-                        <div className='flex items-center'>
-                            <input type='number' placeholder='Where are you going?' className='flex-1 py-2 outline-none' />
-                            {/* <div className='absolute h-[100px] bg-white'>
-
-                            </div> */}
+                        <div className='flex items-center flex-col'>
+                            <div onClick={() => {
+                                setShow(!show);
+                            }} className='flex items-center gap-2 cursor-pointer'>
+                                <p className='whitespace-nowrap py-2'>Number of people</p>
+                                <MdArrowDropDown size={24} />
+                            </div>
+                            <div className='w-full relative'>
+                                <div className={`absolute px-2.5 flex flex-col gap-4 duration-300 w-[150%] ${show ? "h-[max-content] py-3" : "h-[0px] py-0"} rounded-b-lg bg-white top-0 z-[13] overflow-hidden`}>
+                                    <div className='flex items-center justify-between'>
+                                        <p className='font-semibold'>{counter.children} Children:</p>
+                                        <div className='flex gap-1 items-center'>
+                                            <GrSubtract size={24} className='border-[3px] border-[#10B5CB] p-[2.5px] rounded-full font-semibold' />
+                                            <GrAdd size={24} className='border-[3px] border-[#10B5CB] p-[2.5px] rounded-full font-semibold' />
+                                        </div>
+                                    </div>
+                                    <div className='flex items-center justify-between'>
+                                        <p className='font-semibold'>{counter.adult} Adult:</p>
+                                        <div className='flex gap-1 items-center'>
+                                            <GrSubtract size={24} className='border-[3px] border-[#10B5CB] p-[2.5px] rounded-full font-semibold' />
+                                            <GrAdd size={24} className='border-[3px] border-[#10B5CB] p-[2.5px] rounded-full font-semibold' />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <button className='whitespace-nowrap py-2 px-3 bg-[#999999] text-white'>Create Plan</button>
                     </div>
