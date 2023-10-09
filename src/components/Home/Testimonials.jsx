@@ -36,23 +36,25 @@ function TestimonialCard() {
 
 export default function Testimonials() {
     return (
-        <div className="container px-8 sm:yypx-16">
-            <div className="container-1">
-                <h1>Don't take our word for it</h1>
-                <p style={{
-                    width: "75%",
-                    textAlign: "center",
-                }}>See what our users have to say about revolutionizing their travel experiences with Travelux.ai</p>
-            </div>
-            <div className="container-2">
-                <div className="row-2">
-                    <TestimonialCard/>
-                    <TestimonialCard/>
+        <div className='flex justify-center'>
+            <div className="container">
+                <div className="container-1">
+                    <h1>Don't take our word for it</h1>
+                    <p style={{
+                        width: "75%",
+                        textAlign: "center",
+                    }}>See what our users have to say about revolutionizing their travel experiences with Travelux.ai</p>
                 </div>
+                <div className="container-2">
+                    <div className="row-2">
+                        <TestimonialCard/>
+                        <TestimonialCard/>
+                    </div>
 
-                <div className="row-2">
-                    <TestimonialCard/>
-                    <TestimonialCard/>
+                    <div className="row-2">
+                        <TestimonialCard/>
+                        <TestimonialCard/>
+                    </div>
                 </div>
             </div>
         </div>

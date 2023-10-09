@@ -10,7 +10,7 @@ export default function Layout({ children }) {
                 <div className='flex gap-3 text-lg items-center p-4 bg-white'>
                     <BiArrowBack onClick={() => {
                         navigate("/");
-                    }} size={26} className='rounded-full p-1 hover:bg-[rgba(0,0,0,0.1)]' />
+                    }} size={26} className='rounded-full p-1 cursor-pointer hover:bg-[rgba(0,0,0,0.1)]' />
                     Travelux.ai
                 </div>
                 <div className='flex-1 p-8 flex flex-col gap-12 overflow-y-scroll remove-scroll'>
