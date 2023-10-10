@@ -32,7 +32,7 @@ function Signin({ setIsSignup }) {
                 <div className='w-full ss:w-[80%] xlg:w-[85%] lg:w-[65%] 2xl:w-[50%] md:max-w-[550px] flex flex-col gap-8'>
                     <div className='flex flex-col gap-2'>
                         <h1 className='text-3xl xxs:text-4xl ss:text-5xl font-medium whitespace-nowrap'>Welcome back</h1>
-                        <p className='text-base xxs:text-lg'>Does'nt have an account? <u onClick={() => {
+                        <p className='text-base xxs:text-lg'>Doesn't have an account? <u onClick={() => {
                             setIsSignup(true);
                         }} className='text-[#10B5CB] cursor-pointer'>SignUp</u></p>
                     </div>
