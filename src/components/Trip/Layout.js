@@ -2,7 +2,7 @@ import React from 'react';
 import { BiArrowBack } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 
-export default function Layout({ children }) {
+export default function Layout({ children, portal }) {
     let navigate = useNavigate();
     return (
         <div className='flex h-screen'>
@@ -17,10 +17,13 @@ export default function Layout({ children }) {
                     {children}
                 </div>
             </div>
-            <div className='w-[45%]'>
+            <div className='w-[45%] relative'>
                 <iframe className='w-full h-full' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d439958.4171923024!2d76.08299557343754!3d30.516086499999993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fc32344a6e2d7%3A0x81b346dee91799ca!2sChitkara%20University!5e0!3m2!1sen!2sin!4v1696862533035!5m2!1sen!2sin" style={{
                     border: "0px"
                 }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div id='portal' className='absolute bottom-4 w-[95%] left-[50%] translate-x-[-50%] bg-white rounded-lg z-[13]'>
+                    {portal}
+                </div>
             </div>
         </div>
     );

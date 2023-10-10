@@ -16,8 +16,10 @@ export default function UserState({ children }) {
         PublicApi.get("/api/v1/users").then((res) => {
             setData(res.data);
             navigate('/');
+            setLoader(false);
         }).catch((err) => {
             console.log(err);
+            setLoader(false);
         });
     }
     const fetchUserDetailsWithoutLoader = async () => {
@@ -33,10 +35,13 @@ export default function UserState({ children }) {
     }, []);
 
     useEffect(() => {
+        if(location.pathname.includes('/trip') && !data && !loader){
+            // navigate("/");
+        }
         if (location.pathname === '/auth' && data && !loader) {
             navigate('/');
         }
-    }, [location.pathname]);
+    }, [location.pathname, loader]);
 
     if(loader){
 
