@@ -1,31 +1,30 @@
-import React from 'react'
-import {AiOutlineMenu} from 'react-icons/ai'
+import React, { useContext } from 'react';
+import { UserContext } from '../context/UserState';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const NavBar = () => {
-  return (
-    <>
-        <div className='flex justify-between p-5 h-24 bg-white items-center max-w-screen mx-auto'>
-            <h1 className='w-full text-4xl font-bold text-[#395090]'>TravelUx.ai</h1>
-            <ul className='flex'>
-                <li className='p-3'>
-                    <select>
-                        <option>English</option>
-                        <option>Spanish</option>
-                    </select>
-                </li>
-                <li className='p-3'>
-                    <button className=' bg-blue-500 px-5 rounded text-lg text-white'>Login</button>
-                </li>
-            </ul>
-            <div>
-                <AiOutlineMenu size={20} />
-            </div>
-            <div>
+export default function Navbar() {
 
+    let user = useContext(UserContext);
+    let navigate = useNavigate();
+    let location = useLocation();
+
+    return (
+        <div className={`w-full ${location.pathname.includes("trip") ? "hidden" : "flex"} justify-center items-center py-4 px-8 sm:px-16 bg-white fixed top-0 z-[30]`}>
+            <div className='max-w-screen-2xl w-full flex gap-4 justify-between items-center'>
+                <div className='flex gap-3 items-center'>
+                    <div className='w-6 h-6 rounded-full bg-gray-800'></div>
+                    <p className='text-lg'>Travelux.ai</p>
+                </div>
+                <div className='flex gap-4 items-center'>
+                    {
+                        user.data && user.data.fullname ? <div className='w-10 h-10 border flex justify-center items-center rounded-full cursor-pointer'>
+                            <p>{user.data.fullname[0]}</p>
+                        </div> : <button onClick={() => {
+                            navigate('/auth');
+                        }} className='py-1 px-3 rounded-lg text-lg text-white bg-[linear-gradient(90deg,#10B5CB_0%,#0073A8_100%)]'>Signin</button>
+                    }
+                </div>
             </div>
         </div>
-    </>
-  )
+    )
 }
-
-export default NavBar
