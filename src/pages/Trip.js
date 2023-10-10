@@ -42,9 +42,9 @@ export default function Trip() {
                 <div className='flex gap-3'>
                     <div className='flex-1 flex px-4 text-lg items-center rounded-full bg-white border border-[#CCCCCC] overflow-hidden'>
                         <LuSearch size={20} className='text-[#CCCCCC]' />
-                        <input placeholder='Search Here' className='w-full px-4 py-2 outline-none' />
+                        <input placeholder='Search Here' className='w-full px-4 py-1 outline-none' />
                     </div>
-                    <div className='flex w-[max-content] text-lg gap-2 items-center px-4 py-2 rounded-full bg-white border border-[#CCCCCC] text-[#CCCCCC]'>
+                    <div className='flex w-[max-content] text-lg gap-2 items-center px-4 py-1 rounded-full bg-white border border-[#CCCCCC] text-[#CCCCCC]'>
                         <BsBookmark />
                         <p>Selected sights</p>
                     </div>
