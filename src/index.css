@@ -9,7 +9,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+<<<<<<< HEAD
+=======
 
 .remove-scroll::-webkit-scrollbar {
   width: 0px;
 }
+>>>>>>> 39213d8c4efeb8961a67f81389ef5804b171f5a7
