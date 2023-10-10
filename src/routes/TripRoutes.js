@@ -5,11 +5,10 @@ import Trip from '../pages/Trip';
 export default function TripRoutes() {
     
     const { id } = useParams();
-    console.log(id);
 
     return (
         <Routes>
-            <Route path='/trip' element={<Trip />} />
+            <Route path='/' element={<Trip />} />
         </Routes>
     )
 }
