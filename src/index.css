@@ -6,10 +6,33 @@
   margin: 0px;
   padding: 0px;
   font-family: "Montserrat", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+ 
 }
 
 .remove-scroll::-webkit-scrollbar {
   width: 0px;
+}
+
+#meal-budget {
+  -webkit-appearance: none;
+  height: 10px;
+  border-radius: 5px;
+  
+}
+#meal-budget::-webkit-slider-runnable-track{
+  /* width: 100%; */
+  height: 6px;
+  background-color: red;
+  border-radius: 5px;
+}
+
+
+input[type=range]::-webkit-slider-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  background: #9f2323;
+  -webkit-appearance: none;
+  margin-top: -8px;
 }
