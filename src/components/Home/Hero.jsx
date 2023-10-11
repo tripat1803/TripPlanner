@@ -1,20 +1,64 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { GrAdd, GrSubtract } from 'react-icons/gr';
 import { MdArrowDropDown } from 'react-icons/md';
+import { TripContext } from '../../context/TripState';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserState';
+import toast from 'react-hot-toast';
 
 export default function Hero() {
 
+    let navigate = useNavigate();
+    let user = useContext(UserContext);
+    let trip = useContext(TripContext);
     const [data, setData] = useState({
         search: "",
         goingDate: "",
         returnDate: ""
     });
     const [counter, setCounter] = useState({
-        adult: 0,
+        adult: 1,
         children: 0
     });
     const [show, setShow] = useState(false);
+    const [style, setStyle] = useState({});
+
+    useEffect(() => {
+        if(data.search !== "" && data.goingDate !== "" && data.returnDate !== "") {
+            setStyle({
+                backgroundColor: "#10B5CB"
+            });
+        } else {
+            setStyle({
+                backgroundColor: "#999999"
+            });
+        }
+    }, [data]);
+
+    const handleCreateTrip = () => {
+        if(user.isAuthenticated()){
+            if (data.search !== "" && data.goingDate !== "" && data.returnDate !== "") {
+                trip.setData((prev) => [
+                    ...prev,
+                    {
+                        id: trip.data.length+1,
+                        search: data.search,
+                        goingDate: data.goingDate,
+                        returnDate: data.returnDate,
+                        adult: counter.adult,
+                        children: counter.children
+                    }
+                ]);
+                trip.updateData();
+                navigate(`/${trip.data.length+1}/trip`);
+            } else {
+                toast.error("Please fill all the fields");
+            }
+        } else {
+            toast.error("Please login to create a trip");
+        }
+    }
 
     return (
         <div style={{
@@ -31,13 +75,28 @@ export default function Hero() {
                     <div className='bg-white rounded-lg flex gap-4'>
                         <div className='w-[40%] flex items-center pl-3'>
                             <CiSearch size={24} />
-                            <input type='text' placeholder='Where are you going?' className='flex-1 py-2 px-3 outline-none' />
+                            <input onChange={(e) => {
+                                setData({
+                                    ...data,
+                                    search: e.target.value
+                                });
+                            }} type='text' placeholder='Where are you going?' className='flex-1 py-2 px-3 outline-none' />
                         </div>
                         <div className='flex items-center'>
-                            <input type='date' placeholder='Going Date' className='flex-1 py-2 outline-none' />
+                            <input onChange={(e) => {
+                                setData({
+                                    ...data,
+                                    goingDate: e.target.value
+                                });
+                            }} type='date' placeholder='Going Date' className='flex-1 py-2 outline-none' />
                         </div>
                         <div className='flex items-center'>
-                            <input type='date' className='flex-1 py-2 outline-none' />
+                            <input onChange={(e) => {
+                                setData({
+                                    ...data,
+                                    returnDate: e.target.value
+                                });
+                            }} type='date' className='flex-1 py-2 outline-none' />
                         </div>
                         <div className='flex items-center flex-col'>
                             <div onClick={() => {
@@ -54,7 +113,7 @@ export default function Hero() {
                                             <GrSubtract onClick={() => {
                                                 setCounter({
                                                     ...counter,
-                                                    adult: counter.adult > 0 ? counter.adult - 1 : 0
+                                                    adult: counter.adult > 1 ? counter.adult - 1 : 1
                                                 });
                                             }} size={24} className='cursor-pointer border-[2.5px] border-[#10B5CB] p-[2.5px] rounded-full font-semibold text-[#10B5CB]' />
                                             <GrAdd onClick={() => {
@@ -85,7 +144,7 @@ export default function Hero() {
                                 </div>
                             </div>
                         </div>
-                        <button className='whitespace-nowrap py-2 px-3 bg-[#999999] rounded-r-lg text-white'>Create Plan</button>
+                        <button onClick={handleCreateTrip} style={style} className='whitespace-nowrap py-2 px-3 rounded-r-lg text-white'>Create Plan</button>
                     </div>
                 </div>
             </div>

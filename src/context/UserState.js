@@ -30,6 +30,10 @@ export default function UserState({ children }) {
         });
     }
 
+    const isAuthenticated = () => {
+        return data ? true : false;
+    }
+
     useEffect(() => {
         fetchUserDetails();
     }, []);
@@ -48,7 +52,7 @@ export default function UserState({ children }) {
     }
 
     return (
-        <UserContext.Provider value={{ data, fetchUserDetailsWithoutLoader }}>
+        <UserContext.Provider value={{ data, fetchUserDetailsWithoutLoader, isAuthenticated }}>
             {children}
         </UserContext.Provider>
     );

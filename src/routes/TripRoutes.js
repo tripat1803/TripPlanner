@@ -11,10 +11,10 @@ export default function TripRoutes() {
 
     return (
         <Routes>
-            <Route path='/' element={<Trip />} />
-            <Route path='/meals' element={<Meals/>} />
-            <Route path='/hotels' element={<Hotels/>} />
-            <Route path='/itinerary' element={<Itinerary/>} />
+            <Route path='/' element={<Trip indexId={Number(id)} />} />
+            <Route path='/meals' element={<Meals indexId={Number(id)} />} />
+            <Route path='/hotels' element={<Hotels indexId={Number(id)} />} />
+            <Route path='/itinerary' element={<Itinerary indexId={Number(id)} />} />
         </Routes>
     )
 }

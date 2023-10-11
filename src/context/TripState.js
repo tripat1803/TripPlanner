@@ -1,37 +1,35 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const TripContext = createContext();
 export default function TripState({children}) {
 
-    const [data, setData] = useState([
-        {
-            search: "",
-            goingDate: "",
-            returnDate: "",
-            numberOfPeople: {
-                adults: 1,
-                children: 0
-            },
-            selectedSights: [],
-            budgetLeve: 0,
-            mealsToInclude: {
-                breakfast: false,
-                lunch: false,
-                dinner: false
-            },
-            stayAddress: "",
-            itinerary: {
-                
-            }
-        }
-    ]);
+    let location = useLocation();
+    let navigate = useNavigate();
+    const [data, setData] = useState([]);
+    const [updateFlag, setUpdateFlag] = useState(false);
 
     const updateData = () => {
-        localStorage.setItem('userData', JSON.stringify(data));
+        setUpdateFlag(true);
     }
 
     const clearData = () => {
         localStorage.removeItem('userData');
+    }
+
+    useEffect(() => {
+        const userData = localStorage.getItem('userData');
+        if(userData){
+            setData(JSON.parse(userData));
+        }
+        if(location.pathname.includes("/trip") && !userData){
+            navigate("/");
+        }
+    }, []);
+
+    if(updateFlag){
+        localStorage.setItem('userData', JSON.stringify(data));
+        setUpdateFlag(false);
     }
 
     return (
@@ -40,3 +38,24 @@ export default function TripState({children}) {
         </TripContext.Provider>
     );
 }
+
+// {
+//     search: "",
+//     goingDate: "",
+//     returnDate: "",
+//     numberOfPeople: {
+//         adults: 1,
+//         children: 0
+//     },
+//     selectedSights: [],
+//     budgetLeve: 0,
+//     mealsToInclude: {
+//         breakfast: false,
+//         lunch: false,
+//         dinner: false
+//     },
+//     stayAddress: "",
+//     itinerary: {
+        
+//     }
+// }
