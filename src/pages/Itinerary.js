@@ -31,7 +31,7 @@ function PerDayBreakdown({setPortal}) {
     return (
         <div onClick={() => {
             setPortal(<Portal setPortal={setPortal} />);
-        }} className='p-4 flex flex-col gap-3 bg-[#CCCCCC] bg-opacity-20 rounded-lg'>
+        }} className='p-4 flex flex-col gap-3 bg-[#CCCCCC] bg-opacity-20 rounded-lg cursor-pointer'>
             <p className='text-[#10B5CB]'>Jallianwala Bagh</p>
             <p className='text-xs font-extralight'>Public garden with a memorial, in the shape of an eternal flame, to the massacre of 13 April 1919.</p>
             <div className='flex gap-2 items-center'>
@@ -39,7 +39,7 @@ function PerDayBreakdown({setPortal}) {
                 <p className='px-[8px] py-[2px] bg-[#10B5CB] bg-opacity-10 text-[#10B5CB] text-[0.6rem] font-medium rounded-full'>₹ 3</p>
             </div>
         </div>
-    )
+    );
 }
 
 function ItineraryCard({ date="22 Oct", setPortal }) {
@@ -83,7 +83,7 @@ function ItineraryCard({ date="22 Oct", setPortal }) {
                 }
             </div>}
         </div>
-    )
+    );
 }
 
 export default function Itinerary() {
