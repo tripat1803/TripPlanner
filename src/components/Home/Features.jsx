@@ -4,8 +4,8 @@ import "../../styles/features.css";
 function FeaturesCard({ icon, heading, body }) {
     return (
         <div className="layout">
-            <div className="icon">{icon}</div>
-            <div className="feature">
+            <div className="bg-[#F0F0F0] border-[7.5px] border-[#F5F5F5] rounded-full w-[72px] h-[72px] flex justify-center items-center text-3xl">{icon}</div>
+            <div className="flex-1">
                 <h4 className='text-xl font-semibold'>{heading}</h4>
                 <p className='text-[#666666]'>{body}</p>
             </div>
@@ -32,7 +32,6 @@ export default function Features() {
                     <div className="row">
                         <FeaturesCard icon="📲" heading="Travel Reel Insights" body="Utilize social media's potential by gathering travel insights from Instagram reels and integrate them into your itinerary." />
                         <FeaturesCard icon="🦐" heading="Local Cuisine Recommendations" body="Discover local cuisines and hidden gems recommended by our AI, tailored to your taste buds." />
-
                     </div>
                 </div>
             </div>
