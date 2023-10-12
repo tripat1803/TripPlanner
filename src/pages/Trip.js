@@ -21,7 +21,7 @@ function TripCard({ data, selctedSights, setSelectedSights }) {
 
     return (
         <div onClick={() => {
-            if(selctedSights.includes(data.id)){
+            if (selctedSights.includes(data.id)) {
                 setSelectedSights(selctedSights.filter((id) => {
                     return id !== data.id;
                 }));
@@ -32,7 +32,7 @@ function TripCard({ data, selctedSights, setSelectedSights }) {
             border: "2px solid #10B5CB"
         } : {
             border: "2px solid transparent"
-        }} className='h-[max-content] flex flex-col rounded-lg duration-200 overflow-hidden bg-white'>
+        }} className='h-[max-content] cursor-pointer flex flex-col rounded-lg duration-200 overflow-hidden bg-white'>
             <img src={require("../assets/background.png")} className='w-full h-[150px] object-cover' />
             <div className='p-2 h-[max-content] flex flex-col gap-3'>
                 <p className='text-2xl font-semibold'>{data.name}</p>
@@ -53,44 +53,41 @@ function TripCard({ data, selctedSights, setSelectedSights }) {
     );
 }
 
-export default function Trip({ indexId }) {
+export default function Trip({ indexId, tripData }) {
 
     let trip = useContext(TripContext);
     let navigate = useNavigate();
-    const [tripData, setTripData] = useState(null);
     const [selctedSights, setSelectedSights] = useState([]);
 
-    useLayoutEffect(() => {
-        if (trip.data && trip.data.length >= indexId) {
-            if (Places.filter((data) => {
-                return String(trip.data[indexId - 1]['search']).toLowerCase().includes(String(data.city).toLowerCase());
-            }).length !== 0) {
-                setTripData(Places.filter((data) => {
-                    return String(trip.data[indexId - 1]['search']).toLowerCase().includes(String(data.city).toLowerCase());
-                })[0]);
-                setSelectedSights(trip.data[indexId - 1]['selctedSights'] || []);
-            }
-        }
-    }, [trip.data]);
-
     const handleNavigate = () => {
-        if(selctedSights.length >= 3){
-            trip.setData((prev) => [
-                ...trip.data.filter((item) => item.id !== indexId),
-                {
-                    ...trip.data.filter((item) => item.id === indexId)[0],
-                    selctedSights
-                }
-            ]);
-            trip.updateData();
-            navigate(`/${indexId}/trip/meals`);
+        if (selctedSights.length >= 3) {
+            let dataArr = [];
+            if(trip.data && trip.data.length >= indexId){
+                trip.data.forEach((tripp) => {
+                    if (tripp.id === indexId) {
+                        dataArr.push({
+                            ...trip.data.filter((trip) => trip.id === indexId)[0],
+                            selctedSights
+                        })
+                    } else {
+                        dataArr.push(tripp);
+                    }
+                });
+                trip.setData(dataArr);
+                trip.updateData();
+                navigate(`/${indexId}/trip/meals`);
+            }
         } else {
             toast.error("Please select atleast 3 sights");
         }
     }
 
+    useLayoutEffect(() => {
+        setSelectedSights(trip.data[indexId-1]?.selctedSights || []);
+    }, [trip.data]);
+
     return (
-        <Layout handlePrev={null} handleNext={handleNavigate} >
+        <Layout handlePrev={null} handleNext={handleNavigate} location={tripData && tripData.location}>
             <div className='flex flex-col gap-3'>
                 <h1 className='text-4xl'>Top sights in {tripData && tripData.city}</h1>
                 <p className='text-[#999999]'>Select the sights you would like to include for your visit in Goa</p>

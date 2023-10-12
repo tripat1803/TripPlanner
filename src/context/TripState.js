@@ -48,12 +48,13 @@ export default function TripState({children}) {
 //         children: 0
 //     },
 //     selectedSights: [],
-//     budgetLeve: 0,
+//     budgetLevel: 0,
 //     mealsToInclude: {
 //         breakfast: false,
 //         lunch: false,
 //         dinner: false
 //     },
+//     mealsCost: 0,
 //     stayAddress: "",
 //     itinerary: {
         

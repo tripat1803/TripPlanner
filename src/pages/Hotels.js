@@ -1,10 +1,21 @@
 import React from 'react';
 import Layout from '../components/Trip/Layout';
 import { BsFillBuildingFill } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
-export default function Hotels() {
+export default function Hotels({ indexId }) {
+
+    let navigate = useNavigate();
+
+    const handleNext = () => {
+        navigate(`/${indexId}/trip/itinerary`);
+    }
+    const handlePrev = () => {
+        navigate(`/${indexId}/trip/meals`);
+    }
+
     return (
-        <Layout>
+        <Layout handleNext={handleNext} handlePrev={handlePrev} >
             <div className='flex flex-col gap-3'>
                 <h1 className='text-4xl'>Set your lodging (Optional)</h1>
                 <p className='text-[#999999]'>Add you lodging, and we'll craft the ideal route around your stay. Optimized adventures start at your doorstep! 🏨</p>
