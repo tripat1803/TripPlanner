@@ -30,7 +30,7 @@ export default function Features() {
                     </div>
 
                     <div className="row">
-                        <FeaturesCard icon="📲" heading="Travel Reel Insights" body="Utilize social media's potential by gathering travel insights from Instagram reels and integrate them into your itinerary." />
+                        <FeaturesCard icon="📲" heading="Travel Reel Insights" body="Gather travel insights from Instagram reels and integrate them into your itinerary." />
                         <FeaturesCard icon="🦐" heading="Local Cuisine Recommendations" body="Discover local cuisines and hidden gems recommended by our AI, tailored to your taste buds." />
                     </div>
                 </div>
