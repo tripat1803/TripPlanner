@@ -2,8 +2,9 @@ import React from 'react';
 import { BiArrowBack } from 'react-icons/bi';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
-export default function Layout({ children, portal, handlePrev, handleNext=()=>{}, location }) {
+export default function Layout({ children, portal, handlePrev, handleNext=()=>{}, location, handleNextLink }) {
     let navigate = useNavigate();
     return (
         <div className='flex h-screen'>
@@ -27,7 +28,9 @@ export default function Layout({ children, portal, handlePrev, handleNext=()=>{}
                     </div>
                     <div className='flex items-center gap-3'>
                         {(handlePrev) && <button onClick={handlePrev} className='py-1 px-3 flex gap-2 items-center rounded-full text-[#999999] hover:underline'><BsArrowLeft size={18} /> Back</button>}
-                        <button onClick={handleNext} className='py-1 px-3 flex gap-2 items-center rounded-full bg-[#10B5CB] text-white'>Next <BsArrowRight size={18} /></button>
+                        {
+                            handleNextLink ? <HashLink smooth={true} to={handleNextLink} className='py-1 px-3 flex gap-2 items-center rounded-full bg-[#10B5CB] text-white'>Next <BsArrowRight size={18} /></HashLink> : <button onClick={handleNext} className='py-1 px-3 flex gap-2 items-center rounded-full bg-[#10B5CB] text-white'>Next <BsArrowRight size={18} /></button>
+                        }
                     </div>
                 </div>
             </div>

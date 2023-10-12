@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import TripRoutes from './routes/TripRoutes';
 import { Toaster } from 'react-hot-toast';
+import Chatbot from './components/Chatbot';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path='/auth' element={<Authentication/>} />
         <Route path='/:id/trip/*' element={<TripRoutes/>} />
       </Routes>
+      <Chatbot/>
       <Toaster/>
     </Fragment>
   );

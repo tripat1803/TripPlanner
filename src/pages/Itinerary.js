@@ -3,6 +3,7 @@ import Layout from '../components/Trip/Layout';
 import { FaBusAlt } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import { RxReload } from 'react-icons/rx';
+import { useNavigate } from 'react-router-dom';
 
 function Portal({ setPortal }) {
     return (
@@ -86,12 +87,15 @@ function ItineraryCard({ date="22 Oct", setPortal }) {
     );
 }
 
-export default function Itinerary() {
+export default function Itinerary({ indexId, tripData }) {
 
+    let navigate = useNavigate();
     const [portal, setPortal] = useState(null);
 
     return (
-        <Layout portal={portal}>
+        <Layout handlePrev={() => {
+            navigate(`/${indexId}/trip/meals`);
+        }} handleNextLink={"/#listing"} portal={portal} location={tripData && tripData.location}>
             <div className='flex flex-col gap-3'>
                 <p className='text-[#999999]'>Your trip to</p>
                 <h1 className='text-4xl font-medium'>Aguada Fort, Goa, India</h1>

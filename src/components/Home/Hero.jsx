@@ -63,7 +63,7 @@ export default function Hero() {
     return (
         <div style={{
             userSelect: "none"
-        }} className='min-h-screen py-4 flex justify-center items-center px-8 sm:px-16 relative'>
+        }} id='create' className='min-h-screen py-4 flex justify-center items-center px-8 sm:px-16 relative'>
             <img className='absolute top-0 left-0 w-full h-full object-cover z-[1]' src={require("../../assets/background.png")} />
             <div className='absolute top-0 left-0 w-full h-full bg-[#2F6A7F] mix-blend-hard-light z-[2]'></div>
             <div className='max-w-screen-2xl w-full flex justify-center items-center z-[13]'>
@@ -109,7 +109,7 @@ export default function Hero() {
                                 <div className={`absolute px-2.5 flex flex-col gap-4 duration-300 w-[150%] ${show ? "h-[max-content] py-3" : "h-[0px] py-0"} rounded-b-lg bg-white top-0 z-[13] overflow-hidden`}>
                                     <div className='flex items-center justify-between'>
                                         <p className='font-semibold'>{counter.adult} Adult:</p>
-                                        <div className='flex gap-1 items-center'>
+                                        <div className='flex gap-1 items-center !text-[#10B5CB]'>
                                             <GrSubtract onClick={() => {
                                                 setCounter({
                                                     ...counter,
