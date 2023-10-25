@@ -43,10 +43,8 @@ export default function TripState({children}) {
 //     search: "",
 //     goingDate: "",
 //     returnDate: "",
-//     numberOfPeople: {
-//         adults: 1,
-//         children: 0
-//     },
+//     adults: 1,
+//     children: 0
 //     selectedSights: [],
 //     budgetLevel: 0,
 //     mealsToInclude: {
@@ -56,7 +54,5 @@ export default function TripState({children}) {
 //     },
 //     mealsCost: 0,
 //     stayAddress: "",
-//     itinerary: {
-        
-//     }
+//     itinerary: {}
 // }

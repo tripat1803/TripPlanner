@@ -52,7 +52,7 @@ export default function UserState({ children }) {
     }
 
     return (
-        <UserContext.Provider value={{ data, fetchUserDetailsWithoutLoader, isAuthenticated }}>
+        <UserContext.Provider value={{ data, fetchUserDetailsWithoutLoader, isAuthenticated, setData }}>
             {children}
         </UserContext.Provider>
     );
