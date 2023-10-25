@@ -40,7 +40,7 @@ function Card({ data }) {
                 navigate(`/${data.id}/trip`);
             }
         }} className='w-full h-[300px] rounded-lg overflow-hidden cursor-pointer relative'>
-            <img className='w-full h-full object-cover z-[13]' src={require("../../assets/tripImg.png")} />
+            <img className={`w-full h-full object-cover z-[13] duration-300 ${style ? "scale-[104%]" : "scale-[100%]"}`} src={require("../../assets/tripImg.png")} />
             <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-end p-4 z-[1]'>
                 <div className='w-full text-white'>
                     <div className={`flex flex-col gap-[2px] duration-300 ${style ? "mb-0":"-mb-2.5"}`}>

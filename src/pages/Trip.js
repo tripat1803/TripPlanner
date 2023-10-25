@@ -106,10 +106,10 @@ export default function Trip({ indexId, tripData }) {
                         <LuSearch size={20} className='text-[#CCCCCC]' />
                         <input placeholder='Search Here' className='w-full px-4 py-1 outline-none' />
                     </div>
-                    <div className='flex w-[max-content] text-lg gap-2 items-center px-4 py-1 rounded-full bg-white border border-[#CCCCCC] text-[#CCCCCC]'>
+                    <button className='flex w-[max-content] text-lg gap-2 items-center px-4 py-1 rounded-full bg-white border border-[#CCCCCC] text-[#CCCCCC]'>
                         <BsBookmark />
                         <p>Selected sights</p>
-                    </div>
+                    </button>
                 </div>
                 <div className='grid grid-cols-2 2xl:grid-cols-3 gap-4 2xl:gap-3'>
                     {
