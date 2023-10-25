@@ -3,6 +3,8 @@ import Layout from '../components/Trip/Layout';
 import { useNavigate } from 'react-router-dom';
 import { TripContext } from '../context/TripState';
 import { MealCost } from '../utils/Places';
+import { PublicApi } from '../utils/Api';
+import toast from 'react-hot-toast';
 
 const neutralsGray04 = "text-[#999999]";
 
@@ -59,22 +61,31 @@ export default function Meals({ indexId, tripData, userTripDetails }) {
   }
 
   const handleNext = () => {
-    let dataArr = [];
-    trip.data.forEach((tripp) => {
-      if (tripp.id === indexId) {
-        dataArr.push({
-          ...trip.data.filter((trip) => trip.id === indexId)[0],
-          mealsToInclude: data.mealsToInclude,
-          budgetLevel: data.budgetLevel,
-          mealsCost: (data.mealsToInclude.breakfast ? mealsData.breakfast : 0) + (data.mealsToInclude.lunch ? mealsData.lunch : 0) + (data.mealsToInclude.dinner ? mealsData.dinner : 0)
-        })
-      } else {
-        dataArr.push(tripp);
-      }
-    });
-    trip.setData(dataArr);
-    trip.updateData();
-    navigate(`/${indexId}/trip/hotels`);
+    PublicApi.put("/api/v1/trip", {
+      trip_id: indexId,
+      mealsToInclude: data.mealsToInclude,
+      budgetLevel: data.budgetLevel,
+      mealsCost: (data.mealsToInclude.breakfast ? mealsData.breakfast : 0) + (data.mealsToInclude.lunch ? mealsData.lunch : 0) + (data.mealsToInclude.dinner ? mealsData.dinner : 0)
+    }).then(() => {
+      let dataArr = [];
+      trip.data.forEach((tripp) => {
+        if (tripp.id === indexId) {
+          dataArr.push({
+            ...trip.data.filter((trip) => trip.id === indexId)[0],
+            mealsToInclude: data.mealsToInclude,
+            budgetLevel: data.budgetLevel,
+            mealsCost: (data.mealsToInclude.breakfast ? mealsData.breakfast : 0) + (data.mealsToInclude.lunch ? mealsData.lunch : 0) + (data.mealsToInclude.dinner ? mealsData.dinner : 0)
+          })
+        } else {
+          dataArr.push(tripp);
+        }
+      });
+      trip.setData(dataArr);
+      trip.updateData();
+      navigate(`/${indexId}/trip/hotels`);
+    }).catch(() => {
+      toast.error("Something went wrong");
+    })
   }
 
   useLayoutEffect(() => {

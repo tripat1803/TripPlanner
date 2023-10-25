@@ -91,6 +91,7 @@ export default function Itinerary({ indexId, tripData }) {
 
     let navigate = useNavigate();
     const [portal, setPortal] = useState(null);
+    const [style, setStyle] = useState(false);
 
     return (
         <Layout handlePrev={() => {
@@ -99,7 +100,15 @@ export default function Itinerary({ indexId, tripData }) {
             <div className='flex flex-col gap-3'>
                 <p className='text-[#999999]'>Your trip to</p>
                 <h1 className='text-4xl font-medium'>Aguada Fort, Goa, India</h1>
-                <p className='animation-rotate w-[max-content] text-[#10B5CB] cursor-pointer duration-150 hover:scale-[105%] hover:underline text-[0.80rem] flex gap-2 items-center'><RxReload className='font-semibold duration-200' />Try new preferences</p>
+                <p onMouseEnter={() => {
+                    setStyle(true);
+                }} onMouseLeave={() => {
+                    setStyle(false);
+                }} onClick={() => {
+                    navigate(`/${indexId}/trip`);
+                }} className='animation-rotate w-[max-content] text-[#10B5CB] cursor-pointer duration-150 hover:scale-[105%] hover:underline text-[0.80rem] flex gap-2 items-center'><RxReload style={style && {
+                    rotate: "180deg"
+                }} className='font-semibold duration-200' />Try new preferences</p>
             </div>
             <div className='flex flex-col gap-5'>
                 <div className='flex gap-3 items-center justify-between'>

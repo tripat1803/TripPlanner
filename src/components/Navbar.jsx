@@ -33,6 +33,8 @@ export default function Navbar() {
                                     <button onClick={async () => {
                                         PublicApi.get("/api/v1/users/logout").then((res) => {
                                             user.setData(null);
+                                            setDropDown(false);
+                                            localStorage.removeItem("userData");
                                         }).catch((err) => {
                                             console.log(err);
                                         });
