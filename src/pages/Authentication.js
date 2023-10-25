@@ -22,6 +22,7 @@ function Signup({ setIsSignup }) {
             PublicApi.post("/api/v1/users/register", data).then((res) => {
                 user.fetchUserDetailsWithoutLoader();
                 navigate('/');
+                setIsSignup(false);
                 setData({
                     fullname: '',
                     providerId: '',
@@ -34,7 +35,6 @@ function Signup({ setIsSignup }) {
                     providerId: '',
                     password: '',
                 });
-                console.log(err);
                 setLoader(false);
             })
         }
@@ -66,7 +66,9 @@ function Signup({ setIsSignup }) {
                     }} className='w-full px-4 py-1 sm:py-1.5 bg-[#10B5CB] text-white rounded-lg text-base xxs:text-lg'>Continue</button>
                 </div>
             </div>
-            <div className='flex-1 hidden md:block'></div>
+            <div className='flex-1 hidden md:block'>
+                <img className='w-full h-full object-cover' src={require("../assets/background.png")} />
+            </div>
         </div>
     );
 }
@@ -131,7 +133,9 @@ function Signin({ setIsSignup }) {
                     <button className='w-full px-4 py-1 sm:py-1.5 border border-[#333333] text-[#333333] rounded-lg text-base xxs:text-lg flex gap-2 items-center justify-center'><FcGoogle size={30} /> <span>Sign in with Google</span></button>
                 </div>
             </div>
-            <div className='flex-1 hidden md:block'></div>
+            <div className='flex-1 hidden md:block'>
+                <img className='w-full h-full object-cover' src={require("../assets/background.png")} />
+            </div>
         </div>
     );
 }

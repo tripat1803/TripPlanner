@@ -7,6 +7,26 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserState';
 import toast from 'react-hot-toast';
 
+function calculateMaxReturningDate(date, month, year) {
+    date = Number(date);
+    month = Number(month);
+    year = Number(year);
+    if(date+10 > 30) {
+        if(month >= 12) {
+            year++;
+            month = 1;
+        } else {
+            month++;
+        }
+        date = 10 - (30 - date);
+    } else {
+        date += 10;
+    }
+    return `${year}-${(String(month).length === 1) ? ("0"+month) : (month)}-${(String(date).length === 1) ? ("0"+date) : (date)}`;
+}
+
+let dateTime = new Date();
+
 export default function Hero() {
 
     let navigate = useNavigate();
@@ -83,20 +103,21 @@ export default function Hero() {
                             }} type='text' placeholder='Where are you going?' className='flex-1 py-2 px-3 outline-none' />
                         </div>
                         <div className='flex items-center'>
-                            <input onChange={(e) => {
+                            <input value={data.goingDate} onChange={(e) => {
                                 setData({
                                     ...data,
-                                    goingDate: e.target.value
+                                    goingDate: e.target.value,
+                                    returnDate: ""
                                 });
-                            }} type='date' placeholder='Going Date' className='flex-1 py-2 outline-none' />
+                            }} type='date' min={String(dateTime.getFullYear() + "-" + ((String(dateTime.getMonth()+1).length === 1) ? ("0"+(dateTime.getMonth()+1)) : dateTime.getMonth()+1) + "-" + ((String(dateTime.getDate()+1).length === 1) ? ("0"+(dateTime.getDate()+1)) : dateTime.getDate()+1))} placeholder='Going Date' className='flex-1 py-2 outline-none' />
                         </div>
                         <div className='flex items-center'>
-                            <input onChange={(e) => {
+                            <input value={data.returnDate} onChange={(e) => {
                                 setData({
                                     ...data,
                                     returnDate: e.target.value
                                 });
-                            }} type='date' className='flex-1 py-2 outline-none' />
+                            }} type='date' min={String(data.goingDate.split("-")[0] + "-" + data.goingDate.split("-")[1] + "-" + ((String(Number(data.goingDate.split("-")[2])+1).length === 1) ? ("0" + (Number(data.goingDate.split("-")[2])+1)) : (Number(data.goingDate.split("-")[2])+1)))} max={calculateMaxReturningDate(data.goingDate.split("-")[2], data.goingDate.split("-")[1], data.goingDate.split("-")[0])} className='flex-1 py-2 outline-none' />
                         </div>
                         <div className='flex items-center flex-col'>
                             <div onClick={() => {

@@ -9,9 +9,11 @@ export default function Navbar() {
     let location = useLocation();
 
     return (
-        <div className={`w-full ${location.pathname.includes("trip") ? "hidden" : "flex"} justify-center items-center py-4 px-8 sm:px-16 bg-white fixed top-0 z-[30]`}>
+        <div className={`w-full ${location.pathname.includes("trip") ? "hidden" : "flex"} ${location.pathname === "/auth" && "hidden"} justify-center items-center py-4 px-8 sm:px-16 bg-white fixed top-0 z-[30]`}>
             <div className='max-w-screen-2xl w-full flex gap-4 justify-between items-center'>
-                <div className='flex gap-3 items-center'>
+                <div onClick={() => {
+                    navigate("/");
+                }} className='flex gap-3 items-center cursor-pointer'>
                     <div className='w-6 h-6 rounded-full bg-gray-800'></div>
                     <p className='text-lg'>Travelux.ai</p>
                 </div>

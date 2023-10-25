@@ -113,7 +113,7 @@ export default function Meals({ indexId, tripData }) {
   return (
     <Layout handlePrev={handlePrevious} handleNext={handleNext} location={tripData && tripData.location}>
       <div className='flex flex-col gap-3'>
-        <h1 className='text-4xl'>Meals preference</h1>
+        <h1 className='text-4xl'>Meals preference (Optional)</h1>
         <p className={neutralsGray04}>Select the meals you would like to include in your trip, your budget for it and the type of food you prefer.</p>
       </div>
 
