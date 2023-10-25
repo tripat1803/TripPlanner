@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BiArrowBack } from 'react-icons/bi';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import { TripContext } from '../../context/TripState';
 
 export default function Layout({ children, portal, handlePrev, handleNext=()=>{}, location, handleNextLink }) {
     let navigate = useNavigate();
+    let trip = useContext(TripContext);
     return (
         <div className='flex h-screen'>
             <div className='flex-1 h-full bg-[#F0F0F0] flex flex-col'>
@@ -22,7 +24,7 @@ export default function Layout({ children, portal, handlePrev, handleNext=()=>{}
                     <div>
                         <div className='flex gap-3 items-center'>
                             <p className='text-2xl'>Total: ₹50</p>
-                            <p className='text-[#666666]'>Sights cost: ₹50</p>
+                            {/* <p className='text-[#666666]'>Sights cost: ₹50</p> */}
                         </div>
                         <p className='text-sm text-[#999999]'>Select atleast 3 places to visit</p>
                     </div>

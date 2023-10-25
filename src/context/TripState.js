@@ -16,7 +16,7 @@ export default function TripState({children}) {
     const clearData = () => {
         localStorage.removeItem('userData');
     }
-
+ 
     useEffect(() => {
         const userData = localStorage.getItem('userData');
         if(userData){

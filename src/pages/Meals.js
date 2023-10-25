@@ -29,7 +29,7 @@ function MealPreference({ preference }) {
   )
 }
 
-export default function Meals({ indexId, tripData }) {
+export default function Meals({ indexId, tripData, userTripDetails }) {
 
   let navigate = useNavigate();
   let trip = useContext(TripContext);
@@ -78,6 +78,19 @@ export default function Meals({ indexId, tripData }) {
   }
 
   useLayoutEffect(() => {
+    if (userTripDetails) {
+      setTripDetails(userTripDetails);
+
+      if (userTripDetails.mealsToInclude && userTripDetails.budgetLevel) {
+        setData({
+          budgetLevel: userTripDetails.budgetLevel,
+          mealsToInclude: userTripDetails.mealsToInclude
+        });
+      }
+    }
+  }, [userTripDetails]);
+
+  useLayoutEffect(() => {
     if (data.budgetLevel === 0) {
       setMealsData({
         breakfast: MealCost[0].cheap,
@@ -98,17 +111,6 @@ export default function Meals({ indexId, tripData }) {
       });
     }
   }, [data.budgetLevel]);
-
-  useLayoutEffect(() => {
-    setTripDetails(trip.data[indexId - 1] || {});
-    if(trip.data && trip.data.length >= indexId && trip.data[indexId - 1].mealsToInclude && trip.data[indexId - 1].budgetLevel){
-      setData({
-        budgetLevel: trip.data[indexId - 1].budgetLevel,
-        mealsToInclude: trip.data[indexId - 1].mealsToInclude
-      });
-    }
-  }, [trip.data]);
-
 
   return (
     <Layout handlePrev={handlePrevious} handleNext={handleNext} location={tripData && tripData.location}>
@@ -143,9 +145,9 @@ export default function Meals({ indexId, tripData }) {
           <p className={neutralsGray04}>Prices are an estimate of each meal for 8 days per {tripDetails.children + tripDetails.adult} people</p>
         </div>
         <div>
-          <MealsOption value={data.mealsToInclude.breakfast} handleChange={handleChange} meal="Breakfast" cost={`₹${mealsData.breakfast}`} totalCost={((tripDetails.children + tripDetails.adult) * mealsData.breakfast)} />
-          <MealsOption value={data.mealsToInclude.lunch} handleChange={handleChange} meal="Lunch" cost={`₹${mealsData.lunch}`} totalCost={((tripDetails.children + tripDetails.adult) * mealsData.lunch)} />
-          <MealsOption value={data.mealsToInclude.dinner} handleChange={handleChange} meal="Dinner" cost={`₹${mealsData.dinner}`} totalCost={((tripDetails.children + tripDetails.adult) * mealsData.dinner)} />
+          <MealsOption value={data.mealsToInclude.breakfast} handleChange={handleChange} meal="Breakfast" cost={`₹${mealsData.breakfast}`} totalCost={((tripDetails.children + tripDetails.adults) * mealsData.breakfast)} />
+          <MealsOption value={data.mealsToInclude.lunch} handleChange={handleChange} meal="Lunch" cost={`₹${mealsData.lunch}`} totalCost={((tripDetails.children + tripDetails.adults) * mealsData.lunch)} />
+          <MealsOption value={data.mealsToInclude.dinner} handleChange={handleChange} meal="Dinner" cost={`₹${mealsData.dinner}`} totalCost={((tripDetails.children + tripDetails.adults) * mealsData.dinner)} />
         </div>
       </div>
       {/* <div className='flex flex-col gap-5'>

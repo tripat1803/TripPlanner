@@ -6,13 +6,14 @@ import { TripContext } from '../../context/TripState';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserState';
 import toast from 'react-hot-toast';
+import { PublicApi } from '../../utils/Api';
 
 function calculateMaxReturningDate(date, month, year) {
     date = Number(date);
     month = Number(month);
     year = Number(year);
-    if(date+10 > 30) {
-        if(month >= 12) {
+    if (date + 10 > 30) {
+        if (month >= 12) {
             year++;
             month = 1;
         } else {
@@ -22,7 +23,7 @@ function calculateMaxReturningDate(date, month, year) {
     } else {
         date += 10;
     }
-    return `${year}-${(String(month).length === 1) ? ("0"+month) : (month)}-${(String(date).length === 1) ? ("0"+date) : (date)}`;
+    return `${year}-${(String(month).length === 1) ? ("0" + month) : (month)}-${(String(date).length === 1) ? ("0" + date) : (date)}`;
 }
 
 let dateTime = new Date();
@@ -43,9 +44,10 @@ export default function Hero() {
     });
     const [show, setShow] = useState(false);
     const [style, setStyle] = useState({});
+    const [loader, setLoader] = useState(false);
 
     useEffect(() => {
-        if(data.search !== "" && data.goingDate !== "" && data.returnDate !== "") {
+        if (data.search !== "" && data.goingDate !== "" && data.returnDate !== "") {
             setStyle({
                 backgroundColor: "#10B5CB"
             });
@@ -57,21 +59,34 @@ export default function Hero() {
     }, [data]);
 
     const handleCreateTrip = () => {
-        if(user.isAuthenticated()){
+        if (user.isAuthenticated()) {
             if (data.search !== "" && data.goingDate !== "" && data.returnDate !== "") {
-                trip.setData((prev) => [
-                    ...prev,
-                    {
-                        id: trip.data.length+1,
-                        search: data.search,
-                        goingDate: data.goingDate,
-                        returnDate: data.returnDate,
-                        adult: counter.adult,
-                        children: counter.children
-                    }
-                ]);
-                trip.updateData();
-                navigate(`/${trip.data.length+1}/trip`);
+                setLoader(true);
+                PublicApi.post("/api/v1/trip", {
+                    search: data.search,
+                    goingDate: data.goingDate,
+                    returnDate: data.returnDate,
+                    adults: counter.adult,
+                    children: counter.children
+                }).then((res) => {
+                    trip.setData((prev) => [
+                        ...prev,
+                        {
+                            id: res.data._id,
+                            search: data.search,
+                            goingDate: data.goingDate,
+                            returnDate: data.returnDate,
+                            adults: counter.adult,
+                            children: counter.children
+                        }
+                    ]);
+                    trip.updateData();
+                    navigate(`/${res.data._id}/trip`);
+                    setLoader(false);
+                }).catch((err) => {
+                    toast.error("Something went wrong");
+                    setLoader(false);
+                });
             } else {
                 toast.error("Please fill all the fields");
             }
@@ -109,7 +124,7 @@ export default function Hero() {
                                     goingDate: e.target.value,
                                     returnDate: ""
                                 });
-                            }} type='date' min={String(dateTime.getFullYear() + "-" + ((String(dateTime.getMonth()+1).length === 1) ? ("0"+(dateTime.getMonth()+1)) : dateTime.getMonth()+1) + "-" + ((String(dateTime.getDate()+1).length === 1) ? ("0"+(dateTime.getDate()+1)) : dateTime.getDate()+1))} placeholder='Going Date' className='flex-1 py-2 outline-none' />
+                            }} type='date' min={String(dateTime.getFullYear() + "-" + ((String(dateTime.getMonth() + 1).length === 1) ? ("0" + (dateTime.getMonth() + 1)) : dateTime.getMonth() + 1) + "-" + ((String(dateTime.getDate() + 1).length === 1) ? ("0" + (dateTime.getDate() + 1)) : dateTime.getDate() + 1))} placeholder='Going Date' className='flex-1 py-2 outline-none' />
                         </div>
                         <div className='flex items-center'>
                             <input value={data.returnDate} onChange={(e) => {
@@ -117,7 +132,7 @@ export default function Hero() {
                                     ...data,
                                     returnDate: e.target.value
                                 });
-                            }} type='date' min={String(data.goingDate.split("-")[0] + "-" + data.goingDate.split("-")[1] + "-" + ((String(Number(data.goingDate.split("-")[2])+1).length === 1) ? ("0" + (Number(data.goingDate.split("-")[2])+1)) : (Number(data.goingDate.split("-")[2])+1)))} max={calculateMaxReturningDate(data.goingDate.split("-")[2], data.goingDate.split("-")[1], data.goingDate.split("-")[0])} className='flex-1 py-2 outline-none' />
+                            }} type='date' min={String(data.goingDate.split("-")[0] + "-" + data.goingDate.split("-")[1] + "-" + ((String(Number(data.goingDate.split("-")[2]) + 1).length === 1) ? ("0" + (Number(data.goingDate.split("-")[2]) + 1)) : (Number(data.goingDate.split("-")[2]) + 1)))} max={calculateMaxReturningDate(data.goingDate.split("-")[2], data.goingDate.split("-")[1], data.goingDate.split("-")[0])} className='flex-1 py-2 outline-none' />
                         </div>
                         <div className='flex items-center flex-col'>
                             <div onClick={() => {

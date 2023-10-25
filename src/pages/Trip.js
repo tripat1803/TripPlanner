@@ -4,29 +4,29 @@ import { BsBookmark } from 'react-icons/bs';
 import { LuSearch } from 'react-icons/lu';
 import { TripContext } from '../context/TripState';
 import GetRatingUi from '../utils/Components/GetRatingUi';
-import { Places } from '../utils/Places';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { PublicApi } from '../utils/Api';
 
-function TripCard({ data, selctedSights, setSelectedSights }) {
+function TripCard({ data, selectedSights, setSelectedSights }) {
 
     const [style, setStyle] = useState(false);
     useEffect(() => {
-        if (selctedSights.includes(data.id)) {
+        if (selectedSights.includes(data.id)) {
             setStyle(true);
         } else {
             setStyle(false);
         }
-    }, [selctedSights]);
+    }, [selectedSights]);
 
     return (
         <div onClick={() => {
-            if (selctedSights.includes(data.id)) {
-                setSelectedSights(selctedSights.filter((id) => {
+            if (selectedSights.includes(data.id)) {
+                setSelectedSights(selectedSights.filter((id) => {
                     return id !== data.id;
                 }));
             } else {
-                setSelectedSights([...selctedSights, data.id]);
+                setSelectedSights([...selectedSights, data.id]);
             }
         }} style={style ? {
             border: "2px solid #10B5CB"
@@ -57,25 +57,33 @@ export default function Trip({ indexId, tripData }) {
 
     let trip = useContext(TripContext);
     let navigate = useNavigate();
-    const [selctedSights, setSelectedSights] = useState([]);
+    const [selectedSights, setSelectedSights] = useState([]);
 
     const handleNavigate = () => {
-        if (selctedSights.length >= 3) {
+        if (selectedSights.length >= 3) {
             let dataArr = [];
-            if(trip.data && trip.data.length >= indexId){
-                trip.data.forEach((tripp) => {
-                    if (tripp.id === indexId) {
-                        dataArr.push({
-                            ...trip.data.filter((trip) => trip.id === indexId)[0],
-                            selctedSights
-                        })
-                    } else {
-                        dataArr.push(tripp);
-                    }
-                });
-                trip.setData(dataArr);
-                trip.updateData();
-                navigate(`/${indexId}/trip/meals`);
+            if (trip.data) {
+                PublicApi.put(`/api/v1/trip`, {
+                    trip_id: indexId,
+                    selectedSights
+                }).then(() => {
+                    trip.data.forEach((tripp) => {
+                        if (tripp.id === indexId) {
+                            dataArr.push({
+                                ...trip.data.filter((trip) => trip.id === indexId)[0],
+                                selectedSights
+                            })
+                        } else {
+                            dataArr.push(tripp);
+                        }
+                    });
+                    trip.setData(dataArr);
+                    trip.updateData();
+                    navigate(`/${indexId}/trip/meals`);
+                }).catch((err) => {
+                    console.log(err);
+                    toast.error("Something went wrong");
+                })
             }
         } else {
             toast.error("Please select atleast 3 sights");
@@ -83,7 +91,7 @@ export default function Trip({ indexId, tripData }) {
     }
 
     useLayoutEffect(() => {
-        setSelectedSights(trip.data[indexId-1]?.selctedSights || []);
+        setSelectedSights(trip.data?.filter((item) => item.id === indexId)[0]?.selectedSights || []);
     }, [trip.data]);
 
     return (
@@ -106,7 +114,7 @@ export default function Trip({ indexId, tripData }) {
                 <div className='grid grid-cols-2 2xl:grid-cols-3 gap-4 2xl:gap-3'>
                     {
                         tripData && tripData.places.map((data, index) => {
-                            return <TripCard selctedSights={selctedSights} setSelectedSights={setSelectedSights} key={index} data={data} />
+                            return <TripCard selectedSights={selectedSights} setSelectedSights={setSelectedSights} key={index} data={data} />
                         })
                     }
                 </div>

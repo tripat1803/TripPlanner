@@ -12,14 +12,16 @@ export default function TripRoutes() {
     let trip = useContext(TripContext);
     const { id } = useParams();
     const [tripData, setTripData] = useState(null);
+    const [userTripDetails, setUserTripDetails] = useState({});
 
     useLayoutEffect(() => {
-        if (trip.data && trip.data.length >= id) {
+        if (trip.data && trip.data.filter((item) => item.id === id).length !== 0) {
+            setUserTripDetails(trip.data.filter((item) => item.id === id)[0]);
             if (Places.filter((data) => {
-                return String(trip.data[id - 1]['search']).toLowerCase().includes(String(data.city).toLowerCase());
+                return String(trip.data.filter((item) => item.id === id)[0]['search']).toLowerCase().includes(String(data.city).toLowerCase());
             }).length !== 0) {
                 setTripData(Places.filter((data) => {
-                    return String(trip.data[id - 1]['search']).toLowerCase().includes(String(data.city).toLowerCase());
+                    return String(trip.data.filter((item) => item.id === id)[0]['search']).toLowerCase().includes(String(data.city).toLowerCase());
                 })[0]);
             }
         }
@@ -27,10 +29,10 @@ export default function TripRoutes() {
 
     return (
         <Routes>
-            <Route path='/' element={<Trip indexId={Number(id)} tripData={tripData} />} />
-            <Route path='/meals' element={<Meals indexId={Number(id)} tripData={tripData} />} />
-            <Route path='/hotels' element={<Hotels indexId={Number(id)} tripData={tripData} />} />
-            <Route path='/itinerary' element={<Itinerary indexId={Number(id)} tripData={tripData} />} />
+            <Route path='/' element={<Trip indexId={id} tripData={tripData} />} />
+            <Route path='/meals' element={<Meals indexId={id} tripData={tripData} userTripDetails={userTripDetails} />} />
+            <Route path='/hotels' element={<Hotels indexId={id} tripData={tripData} userTripDetails={userTripDetails} />} />
+            <Route path='/itinerary' element={<Itinerary indexId={id} tripData={tripData} userTripDetails={userTripDetails} />} />
         </Routes>
     )
 }
