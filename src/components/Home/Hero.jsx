@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
-import { GrAdd, GrSubtract } from 'react-icons/gr';
 import { MdArrowDropDown } from 'react-icons/md';
 import { TripContext } from '../../context/TripState';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserState';
 import toast from 'react-hot-toast';
 import { PublicApi } from '../../utils/Api';
+import { IoAddOutline } from 'react-icons/io5';
+import { FiMinus } from 'react-icons/fi';
+
 
 function calculateMaxReturningDate(date, month, year) {
     date = Number(date);
@@ -146,13 +148,13 @@ export default function Hero() {
                                     <div className='flex items-center justify-between'>
                                         <p className='font-semibold'>{counter.adult} Adult:</p>
                                         <div className='flex gap-1 items-center !text-[#10B5CB]'>
-                                            <GrSubtract onClick={() => {
+                                            <FiMinus onClick={() => {
                                                 setCounter({
                                                     ...counter,
                                                     adult: counter.adult > 1 ? counter.adult - 1 : 1
                                                 });
                                             }} size={24} className='cursor-pointer border-[2.5px] border-[#10B5CB] p-[2.5px] rounded-full font-semibold text-[#10B5CB]' />
-                                            <GrAdd onClick={() => {
+                                            <IoAddOutline onClick={() => {
                                                 setCounter({
                                                     ...counter,
                                                     adult: counter.adult + 1
@@ -163,13 +165,13 @@ export default function Hero() {
                                     <div className='flex items-center justify-between'>
                                         <p className='font-semibold'>{counter.children} Children:</p>
                                         <div className='flex gap-1 items-center'>
-                                            <GrSubtract onClick={() => {
+                                            <FiMinus onClick={() => {
                                                 setCounter({
                                                     ...counter,
                                                     children: counter.children > 0 ? counter.children - 1 : 0
                                                 });
                                             }} size={24} className='cursor-pointer border-[2.5px] border-[#10B5CB] p-[2.5px] rounded-full font-semibold' />
-                                            <GrAdd onClick={() => {
+                                            <IoAddOutline onClick={() => {
                                                 setCounter({
                                                     ...counter,
                                                     children: counter.children + 1

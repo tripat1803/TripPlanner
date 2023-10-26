@@ -18,7 +18,7 @@ export default function Footer() {
             <div className='z-[13] flex flex-col gap-4'>
                 <h1 className='text-[54px]	text-white font-semibold'>Looking for something else?</h1>
                 <div className='flex justify-between'>
-                    <div className='text-lg text-white text-white'>
+                    <div className='text-lg text-white'>
                         <p>Connect with our experts!</p>
                         <p>Get the best itineraries and offers!</p>
                     </div>
@@ -43,7 +43,6 @@ export default function Footer() {
                         <FooterLink text={"Cancellation Policy"} />
                         <FooterLink text={"Privacy Policyr"} />
                     </div>
-
                 </div>
                 <div className='flex justify-between px-10 py-2 bg-[#10B5CB] text-sm font-medium text-white'>
                     <p>Crafted with ❤️ in Punjab, India</p>
