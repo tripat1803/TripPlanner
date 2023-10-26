@@ -1,14 +1,15 @@
 import React from 'react';
 import {BsQuote} from "react-icons/bs"
 import "../../styles/testimonial.css";
+import tushar from "../../assets/tushar.webp";
+import david from "../../assets/david_jordan.webp";
+import steve from "../../assets/steve_j.webp";
 
-function TestimonialCard({name, designation, message}) {
+function TestimonialCard({name, designation, message, image}) {
     return (
         <div className="card">
             <div className="img">
-                <svg className='w-full h-full' viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle id="Ellipse 1" cx="42.1667" cy="41.6667" r="41.6667" fill="#D9D9D9" />
-                </svg>
+                <img className="rounded-full" src={image} />
             </div>
             <div className="content">
                 <div className="name">
@@ -40,13 +41,13 @@ export default function Testimonials() {
                 </div>
                 <div className="flex flex-col gap-[20px]">
                     <div className="flex gap-5 w-full">
-                        <TestimonialCard name={"David Jordan"} designation={"Engineer @Wipro"} message={"Travelux.ai is a great tool that helps you save time and also headaches when you are planning to go somewhere, it is like a relief of the stress that usually comes at the time of travel either by not being decisive or not knowing where to go in the first place."}/>
-                        <TestimonialCard name={"Tushar"} designation={"Traveller"} message={"Travelux.ai has provided me with so many amazing options on how to plan a trip completely. Right from the arrival to the destination till departure of that country. So much detailed information in such an amazing user friendly interface. Thats just WOW."}/>
+                        <TestimonialCard image={david} name={"David Jordan"} designation={"Engineer @Wipro"} message={"Travelux.ai is a great tool that helps you save time and also headaches when you are planning to go somewhere, it's like a relief of the stress that comes at the time of travel either by not being decisive or not knowing where to go in the first place."}/>
+                        <TestimonialCard image={tushar} name={"Tushar"} designation={"Traveller"} message={"Travelux.ai has provided me with so many amazing options on how to plan a trip completely. Right from the arrival to the destination till departure. So much detailed information in such an amazing user friendly interface. Thats just WOW."}/>
                     </div>
 
                     <div className="flex gap-5 w-full">
-                        <TestimonialCard/>
-                        <TestimonialCard/>
+                        <TestimonialCard image={steve} name={"Steve J"} designation={"CEO"} message={"I love to travel, but hate planning and often book last minute. This app helps me quickly put together an agenda for my trip, removing a lot of the decision-fatigue that plagues trip planning. I've used it for weekend trips with friends, or even when I have free time on a work trip."}/>
+                        <TestimonialCard image={steve} name={"Steve J"} designation={"CEO"} message={"I love to travel, but hate planning and often book last minute. This app helps me quickly put together an agenda for my trip, removing a lot of the decision-fatigue that plagues trip planning. I've used it for weekend trips with friends, or even when I have free time on a work trip."}/>
                     </div>
                 </div>
             </div>
