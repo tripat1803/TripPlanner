@@ -16,7 +16,7 @@ function FeaturesCard({ icon, heading, body }) {
 export default function Features() {
     return (
         <div className='flex justify-center'>
-            <div className="container">
+            <div className="flex flex-col items-center gap-[48px] px-[64px] py-[32px]">
                 <div className="container-4">
                     <h6 className='text-xl text-[#10B5CB]'>TRAVELUX.AI</h6>
                     <h3 className='text-4xl font-semibold'>The only tool you'll ever need!</h3>

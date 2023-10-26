@@ -1,10 +1,10 @@
-.container{
+/* .container{
     padding: 64px 32px;
     display: flex;
     flex-direction: column;
     gap: 48px;
     align-items: center;
-}
+} */
 
 .card{
     flex: 1;
@@ -16,26 +16,26 @@
     padding: 15px 20px;
 }
 
-.row-2{
+/* .row-2{
     display: flex;
     flex-direction: row;
     gap: 20px;
     width: 100%;
 
-}
+} */
 
-.container-1{
+/* .container-1{
     display: flex;
     flex-direction: column;
     gap: 8px;
     align-items: center;
-}
+} */
 
-.container-2{
+/* .container-2{
     display: flex;
     flex-direction: column;
     gap: 20px;
-}
+} */
 
 .img{
     width: 80px;
