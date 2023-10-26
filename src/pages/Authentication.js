@@ -41,7 +41,13 @@ function Signup({ setIsSignup }) {
     }
 
     return (
-        <div className='flex min-h-screen'>
+        <div className='flex min-h-screen relative'>
+            <div onClick={() => {
+                navigate("/");
+            }} className='absolute top-3 left-3 flex gap-3 items-center cursor-pointer'>
+                <div className='w-6 h-6 rounded-full bg-gray-800'></div>
+                <p className='text-lg font-semibold'>Travelux.ai</p>
+            </div>
             <div className='flex-1 p-8 flex justify-center items-center'>
                 <div className='w-full ss:w-[80%] xlg:w-[85%] lg:w-[65%] 2xl:w-[50%] md:max-w-[550px] flex flex-col gap-8'>
                     <div className='flex flex-col gap-2'>
@@ -105,7 +111,13 @@ function Signin({ setIsSignup }) {
         }
     }
     return (
-        <div className='flex min-h-screen'>
+        <div className='flex min-h-screen relative'>
+            <div onClick={() => {
+                navigate("/");
+            }} className='absolute top-3 left-3 flex gap-3 items-center cursor-pointer'>
+                <div className='w-6 h-6 rounded-full bg-gray-800'></div>
+                <p className='text-lg font-semibold'>Travelux.ai</p>
+            </div>
             <div className='flex-1 p-8 flex justify-center items-center'>
                 <div className='w-full ss:w-[80%] xlg:w-[85%] lg:w-[65%] 2xl:w-[50%] md:max-w-[550px] flex flex-col gap-8'>
                     <div className='flex flex-col gap-2'>
