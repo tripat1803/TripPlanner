@@ -19,7 +19,7 @@ export default function Navbar() {
                         navigate("/");
                     }} className='flex gap-3 items-center cursor-pointer'>
                         <div className='w-6 h-6 rounded-full bg-gray-800'></div>
-                        <p className='text-lg'>Travelux.ai</p>
+                        <p className='font-semibold text-[24px]'>Travelux.ai</p>
                     </div>
                     <div className='flex gap-4 items-center'>
                         {

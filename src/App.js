@@ -17,7 +17,7 @@ const App = () => {
         <Route path='/auth' element={<Authentication/>} />
         <Route path='/:id/trip/*' element={<TripRoutes/>} />
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
       <Chatbot/>
       <Toaster/>
     </Fragment>

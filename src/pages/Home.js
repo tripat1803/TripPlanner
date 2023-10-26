@@ -8,9 +8,9 @@ export default function Home() {
   return (
     <Fragment>
       <Hero/>
-      <ListingPage/>
+      {/* <ListingPage/>
       <Features/>
-      <Testimonials/>
+      <Testimonials/> */}
     </Fragment>
   );
 }

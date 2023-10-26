@@ -106,11 +106,11 @@ export default function Hero() {
             <div className='max-w-screen-2xl w-full flex justify-center items-center z-[13]'>
                 <div className='w-[max-content] flex flex-col gap-16'>
                     <div className='flex flex-col gap-1 text-white'>
-                        <h1 className='text-3xl xxs:text-4xl ss:text-5xl'>Explore the world</h1>
-                        <h1 className='text-3xl xxs:text-4xl ss:text-5xl'>like never before</h1>
+                        <h1 className='font-semibold text-3xl xxs:text-4xl ss:text-5xl'>Explore the world</h1>
+                        <h1 className='font-semibold text-3xl xxs:text-4xl ss:text-5xl'>like never before</h1>
                     </div>
-                    <div className='bg-white rounded-lg flex gap-4'>
-                        <div className='w-[40%] flex items-center pl-3'>
+                    <div className='bg-white p-2 lg:p-0 rounded-lg flex flex-col lg:flex-row gap-4'>
+                        <div className='w-full lg:w-[40%] flex items-center pl-3'>
                             <CiSearch size={24} />
                             <input onChange={(e) => {
                                 setData({
@@ -126,7 +126,7 @@ export default function Hero() {
                                     goingDate: e.target.value,
                                     returnDate: ""
                                 });
-                            }} type='date' min={String(dateTime.getFullYear() + "-" + ((String(dateTime.getMonth() + 1).length === 1) ? ("0" + (dateTime.getMonth() + 1)) : dateTime.getMonth() + 1) + "-" + ((String(dateTime.getDate() + 1).length === 1) ? ("0" + (dateTime.getDate() + 1)) : dateTime.getDate() + 1))} placeholder='Going Date' className='flex-1 py-2 outline-none' />
+                            }} type='date' min={String(dateTime.getFullYear() + "-" + ((String(dateTime.getMonth() + 1).length === 1) ? ("0" + (dateTime.getMonth() + 1)) : dateTime.getMonth() + 1) + "-" + ((String(dateTime.getDate() + 1).length === 1) ? ("0" + (dateTime.getDate() + 1)) : dateTime.getDate() + 1))} placeholder='Going Date' className='px-6 lg:px-0 flex-1 py-2 outline-none' />
                         </div>
                         <div className='flex items-center'>
                             <input value={data.returnDate} onChange={(e) => {
@@ -134,9 +134,9 @@ export default function Hero() {
                                     ...data,
                                     returnDate: e.target.value
                                 });
-                            }} type='date' min={String(data.goingDate.split("-")[0] + "-" + data.goingDate.split("-")[1] + "-" + ((String(Number(data.goingDate.split("-")[2]) + 1).length === 1) ? ("0" + (Number(data.goingDate.split("-")[2]) + 1)) : (Number(data.goingDate.split("-")[2]) + 1)))} max={calculateMaxReturningDate(data.goingDate.split("-")[2], data.goingDate.split("-")[1], data.goingDate.split("-")[0])} className='flex-1 py-2 outline-none' />
+                            }} type='date' min={String(data.goingDate.split("-")[0] + "-" + data.goingDate.split("-")[1] + "-" + ((String(Number(data.goingDate.split("-")[2]) + 1).length === 1) ? ("0" + (Number(data.goingDate.split("-")[2]) + 1)) : (Number(data.goingDate.split("-")[2]) + 1)))} max={calculateMaxReturningDate(data.goingDate.split("-")[2], data.goingDate.split("-")[1], data.goingDate.split("-")[0])} className='px-6 lg:px-0 flex-1 py-2 outline-none' />
                         </div>
-                        <div className='flex items-center flex-col'>
+                        <div className='flex items-start px-6 lg:items-center lg:px-0 flex-col'>
                             <div onClick={() => {
                                 setShow(!show);
                             }} className='flex items-center gap-2 cursor-pointer'>
@@ -164,7 +164,7 @@ export default function Hero() {
                                     </div>
                                     <div className='flex items-center justify-between'>
                                         <p className='font-semibold'>{counter.children} Children:</p>
-                                        <div className='flex gap-1 items-center'>
+                                        <div className='flex gap-1 items-center !text-[#10B5CB]'>
                                             <FiMinus onClick={() => {
                                                 setCounter({
                                                     ...counter,
@@ -182,7 +182,7 @@ export default function Hero() {
                                 </div>
                             </div>
                         </div>
-                        <button onClick={handleCreateTrip} style={style} className='whitespace-nowrap py-2 px-3 rounded-r-lg text-white'>Create Plan</button>
+                        <button onClick={handleCreateTrip} style={style} className='whitespace-nowrap py-2 mx-1 lg:px-3 lg:m-0 rounded-l-1.5 rounded-r-1.5 lg:rounded-l-0 lg:rounded-r-lg text-white'>Create Plan</button>
                     </div>
                 </div>
             </div>
