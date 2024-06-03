@@ -66,7 +66,7 @@ export default function ListingPage() {
         setAlltrip(trip.data);
     }, [trip.data]);
 
-    return (alltrip.length > 0) && (
+    return (alltrip && alltrip.length > 0) && (
         <div id='listing' className='flex justify-center items-center py-16 px-8 sm:px-6'>
             <div className='w-full max-w-screen-xl flex flex-col gap-12'>
                 <div className='flex items-center gap-3 justify-between'>

@@ -3,10 +3,12 @@ import { UserContext } from '../context/UserState';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PiSignOutBold } from 'react-icons/pi';
 import { PublicApi } from '../utils/Api';
+import { TripContext } from '../context/TripState';
 
 export default function Navbar() {
 
     let user = useContext(UserContext);
+    let trip = useContext(TripContext);
     let navigate = useNavigate();
     let location = useLocation();
     const [dropDown, setDropDown] = useState(false);
@@ -32,6 +34,7 @@ export default function Navbar() {
                                 {(dropDown) && <div className='bg-white absolute top-[105%] right-0 rounded-lg drop-shadow-md overflow-hidden'>
                                     <button onClick={async () => {
                                         PublicApi.get("/api/v1/users/logout").then((res) => {
+                                            trip.setData(null);
                                             user.setData(null);
                                             setDropDown(false);
                                             localStorage.removeItem("userData");
